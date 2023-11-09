@@ -42,6 +42,7 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
     validateInput(fuelLevel);
     cargoLevel = document.querySelector("input[name=cargoMass]");
     validateInput(cargoLevel);
+    list = document.getElementById("faultyItems");
     list.style = ("visibility: visible");
 
 
@@ -49,12 +50,15 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
  }
  
  async function myFetch() {
-     let planetsReturned;
- 
-     planetsReturned = await fetch("https://handlers.education.launchcode.org/static/planets.json").then( function(response) {
-         });
- 
-     return planetsReturned;
+    let planetList;
+    fetch("https://handlers.education.launchcode.org/static/planets.json").then(function(response) {
+      //  const jsonPlanets = response.json.then(function(json);
+      //  console.log(jsonPlanets);    
+       response.json().then(function(json) {
+        planetList = json;
+        return planetList;
+               });
+       });
  }
  
  function pickPlanet(planets) {
