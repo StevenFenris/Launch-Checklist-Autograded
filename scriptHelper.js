@@ -36,33 +36,49 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
  }
  
  function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
-    pilot = document.querySelector("input[name=pilotName]");
-    copilot = document.querySelector("input[name=copilotName]");
-    fuelLevel = document.querySelector("input[name=fuelLevel]");
-    validateInput(fuelLevel);
-    cargoLevel = document.querySelector("input[name=cargoMass]");
-    validateInput(cargoLevel);
-    list = document.getElementById("faultyItems");
-    list.style = ("visibility: visible");
+       document.getElementById("pilotStatus").innerHTML = `Pilot ${pilot} is ready for launch`;
+       document.getElementById("copilotStatus").innerHTML = `Co-pilot ${copilot} is ready for launch`;
+       let fuelStatus = document.getElementById("fuelStatus");
+       let launchStatus = document.getElementById("launchStatus");
+       let cargoStatus = document.getElementById("cargoStatus");
+       //reset defaults to pass testing
+       fuelStatus.innerHTML = ("Fuel level high enough for launch");
+       cargoStatus.innerHTML = ("Cargo mass low enough for launch");
+       //check values in console and then check for appropriate values for launch and make visible
+       console.log(pilot, copilot, fuelLevel, cargoLevel);
+       //let missionUpdate = document.getElementById("faultyItems");
 
+      if(fuelLevel >= 10000 && cargoLevel <= 10000){ 
+         launchStatus.style = ("color: green"); 
+         launchStatus.innerHTML = ("Shuttle is Ready for Launch");
+         list.style = ("visibility: visible");
+      }else if(fuelLevel < 10000 || cargoLevel > 10000){
+         list.style = ("visibility: visible");
+         launchStatus.style = ("color: red");
+         launchStatus.innerHTML = ("Shuttle Not Ready for Launch");
+         fuelLevel < 10000 ? fuelStatus.innerHTML = ("Fuel level too low for launch"):null;
+         cargoLevel > 10000 ? cargoStatus.innerHTML = ("Cargo mass too heavy for launch"):null;
+      }
+       
+       
+      
 
     
  }
  
  async function myFetch() {
-    let planetList;
-    fetch("https://handlers.education.launchcode.org/static/planets.json").then(function(response) {
-      //  const jsonPlanets = response.json.then(function(json);
+   let planets; 
+   planets = await fetch("https://handlers.education.launchcode.org/static/planets.json").then(function(response) {
+      //  const jsonPlanets = response.json();
       //  console.log(jsonPlanets);    
-       response.json().then(function(json) {
-        planetList = json;
-        return planetList;
-               });
-       });
+       return response.json()
+   });
+ return planets;
  }
  
  function pickPlanet(planets) {
-    return (planets[Math.floor((Math.random() * planets.length))])
+   let planetRando = planets[Math.floor((Math.random() * 6))] //pick random planet
+   return planetRando
  }
  
  module.exports.addDestinationInfo = addDestinationInfo;
