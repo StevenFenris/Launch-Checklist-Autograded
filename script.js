@@ -12,6 +12,7 @@ let form = document.querySelector("form");
         copilot = document.querySelector("input[name=copilotName]").value;
         fuelLevel = document.querySelector("input[name=fuelLevel]").value;
         cargoLevel = document.querySelector("input[name=cargoMass]").value;
+        if(pilot === "" || copilot === "" || fuelLevel ==="" || cargoLevel === ""){alert("Must enter information into all fields!")}
         console.log(pilot, copilot, fuelLevel, cargoLevel);
         formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel);
         event.preventDefault();
