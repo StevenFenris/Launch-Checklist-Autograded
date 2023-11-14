@@ -13,6 +13,8 @@ let form = document.querySelector("form");
         fuelLevel = document.querySelector("input[name=fuelLevel]").value;
         cargoLevel = document.querySelector("input[name=cargoMass]").value;
         if(pilot === "" || copilot === "" || fuelLevel ==="" || cargoLevel === ""){alert("Must enter information into all fields!")}
+        validateInput(cargoLevel) === "Not a Number" ? alert("Enter valid information for Cargo"):null
+        validateInput(fuelLevel) === "Not a Number" ? alert("Enter valid information for Fuel"):null
         console.log(pilot, copilot, fuelLevel, cargoLevel);
         formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel);
         event.preventDefault();
