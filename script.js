@@ -28,7 +28,7 @@ let listedPlanets;
         // Below this comment call the appropriate helper functions to pick a planet fom the list of planets and add that information to your destination.
         planetRando = pickPlanet(listedPlanets);
         console.log(planetRando);
-        addDestinationInfo(document, planetRando.name, planetRando.diameter, planetRando.star, planetRando.distance, planetRando.moons, planetRando.imageUrl);
+        addDestinationInfo(document, planetRando.name, planetRando.diameter, planetRando.star, planetRando.distance, planetRando.moons, planetRando.image);
     });
 
 
